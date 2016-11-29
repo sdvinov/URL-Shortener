@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Using environmental variable PORT or 3000 if not specified
-const port = env.process.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 // Configuring body-parser for POST method
 app.use(bodyParser.urlencoded({ extended: true }));
