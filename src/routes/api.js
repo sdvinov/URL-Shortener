@@ -1,9 +1,9 @@
 module.exports = (express) => {
+
   // Enabeling router
-  
   const router = express.Router();
 
-  // Configuren POST route /api/v1/url
+  // Configuring POST route /api/v1/url
   router.post('/url', (req, res) => {
 
     // Getting origin link

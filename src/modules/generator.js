@@ -9,7 +9,7 @@ exports.shortLink = (originLink) => {
   // If it did not find unique ID for 10 times, stop the loop
   do {
       for(let i = 0; i < 6; i++) {
-        linkId += string.charAt(Math.floor(Math.random() * string.length));
+        linkId += string.charAt(Math.round(Math.random() * (string.length - 1)));
       }
       timesGenerated++;
   } while (allLinkIds.includes(linkId) && timesGenerated < 10);
