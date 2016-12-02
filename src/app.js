@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Using prefix /api/v1 for routes in routes file
-app.use('/api/v1', require('./routes/api.js')(express));
+app.use('/', require('./routes')(express));
 
 // Listening for port
 const server = app.listen(port);
