@@ -5,12 +5,14 @@ module.exports = (express) => {
   // Enabeling router
   const router = express.Router();
 
-  // Configuring POST route /api/v1/user
+  // Create
   router.post('/user', (req, res) => {
+    // Getting data to pass to the database
     const username = req.body.username;
     const password = req.body.password;
     const generate = require('./../../modules/generator');
     const token = generate.randomValue(15);
+    // Creating the user
     link.create({ username: username, password: password, token: token }, (err) => {
       res.status(500).json(err);
     }, (data) => {
@@ -18,6 +20,7 @@ module.exports = (express) => {
     });
   });
 
+  // Find all
   router.get('/users', (req, res) => {
     link.findAll((err) => {
       res.status(500).json(err);
@@ -26,6 +29,7 @@ module.exports = (express) => {
     });
   });
 
+  // Find one by ID
   router.get('/users/:id', (req, res) => {
     req.body.id = req.params.id;
     link.find(req.body, (err) => {
@@ -35,6 +39,7 @@ module.exports = (express) => {
     });
   });
 
+  // Delete one by ID
   router.delete('/users/:id', (req, res) => {
     req.body.id = req.params.id;
     link.destroy(req.body, (err) => {
@@ -44,6 +49,7 @@ module.exports = (express) => {
     });
   });
 
+  // Update one by ID
   router.post('/users/:id', (req, res) => {
     req.body.id = req.params.id;
     link.update(req.body, (err) => {

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const Sequelize = require('sequelize');
 
-
+// Configuring database
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
   host: process.env.DB_HOST,
   dialect: process.env.DB_SCHEMA,
@@ -14,6 +14,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   logging: false,
 });
 
+// Configuring Link table
 const link = sequelize.define('link', {
   originLink: {
     type: Sequelize.STRING,
@@ -27,6 +28,7 @@ const link = sequelize.define('link', {
   },
 });
 
+// Configure User table
 const user = sequelize.define('user', {
   username: {
     type: Sequelize.STRING,
@@ -44,10 +46,12 @@ const user = sequelize.define('user', {
   }
 });
 
+// Creating a foreign key
 user.hasMany(link, {
   foreignKey: 'userID',
 });
 
+// Sync database
 sequelize.sync();
 
 exports.sequelize = sequelize;

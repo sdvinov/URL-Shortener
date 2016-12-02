@@ -3,14 +3,17 @@ const db = require('./db');
 // Create
 exports.create = (payload, err, success) => {
   db.link.find({
+    // Checking if database has originLink OR shortLinkID already
     where: db.Sequelize.or (
       { originLink: payload.originLink },
       { shortLinkID: payload.shortLinkID }
     ),
   }).then((dataFromFind) => {
+    // If it does not, then create this link
     if (dataFromFind) {
       success(dataFromFind);
     } else {
+      // If it does not
       db.link.create(payload).then(success).catch(err)
     };
   }).catch(err);
