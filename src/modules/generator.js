@@ -1,4 +1,4 @@
-exports.shortLink = (charsToGenerate) => {
+exports.randomValue = (charsToGenerate) => {
   let generated = '';
   const string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   for(let i = 0; i < charsToGenerate; i++) {

@@ -18,10 +18,12 @@ const link = sequelize.define('link', {
   originLink: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
   },
   shortLinkID: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
   },
 });
 
@@ -29,6 +31,7 @@ const user = sequelize.define('user', {
   username: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
   },
   password: {
     type: Sequelize.STRING,
@@ -37,6 +40,7 @@ const user = sequelize.define('user', {
   token: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
   }
 });
 
