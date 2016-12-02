@@ -51,5 +51,6 @@ user.hasMany(link, {
 sequelize.sync();
 
 exports.sequelize = sequelize;
+exports.Sequelize = Sequelize;
 exports.user = user;
 exports.link = link;

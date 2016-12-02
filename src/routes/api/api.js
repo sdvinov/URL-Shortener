@@ -9,9 +9,10 @@ module.exports = (express) => {
   router.post('/url', (req, res) => {
 
     const originLink = req.body.link;
+    const token = req.body.userID;
     const generate = require('./../../modules/generator');
     const linkID = generate.randomValue(7);
-    link.create({ originLink: originLink, shortLinkID: linkID }, (err) => {
+    link.create({ originLink: originLink, shortLinkID: linkID, userID: token }, (err) => {
       res.status(500).json(err);
     }, (data) => {
       res.json(data);

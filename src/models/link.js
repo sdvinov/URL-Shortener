@@ -2,7 +2,18 @@ const db = require('./db');
 
 // Create
 exports.create = (payload, err, success) => {
-  db.link.create(payload).then(success).catch(err);
+  db.link.find({
+    where: db.Sequelize.or (
+      { originLink: payload.originLink },
+      { shortLinkID: payload.shortLinkID }
+    ),
+  }).then((dataFromFind) => {
+    if (dataFromFind) {
+      success(dataFromFind);
+    } else {
+      db.link.create(payload).then(success).catch(err)
+    };
+  }).catch(err);
 };
 
 // Find all
@@ -41,4 +52,12 @@ exports.update = (payload, err, success) => {
   }).then((existingData) => {
     existingData.updateAttributes(payload).then(success).catch(err);
   }).catch(err);
+};
+
+exports.go = (payload, err, success) => {
+  db.link.find({
+    where: {
+      shortLinkID: payload.shortLinkID,
+    },
+  }).then(success).catch(err);
 };
