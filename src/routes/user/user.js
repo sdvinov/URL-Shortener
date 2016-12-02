@@ -10,6 +10,7 @@ module.exports = (express) => {
     const username = req.body.username;
     const password = req.body.password;
     const generate = require('./../../modules/generator');
+    const token = generate.randomValue(15);
     link.create({ username: username, password: password, token: token }, (err) => {
       res.status(500).json(err);
     }, (data) => {
