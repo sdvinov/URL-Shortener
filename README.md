@@ -27,7 +27,7 @@ DB_SCHEMA =
 ### URLS
 #### POST localhost:3000/api/v1/url
 
-Use **POST** method to send the link you want to shorten. At this point, `link` is not validated in any way, so it can be pretty much anything. It is expected that you pass the link in the `link` field. Use `userID` field to add user ID to identify which user created that link.
+Use **POST** method to send the link you want to shorten. At this point, `link` is not validated in any way, so it can be pretty much anything. It is expected that you pass the link in the `link` field. Use `userID` field to identify which user created that link. **GET localhost:3000/api/v1/users/:id** will display links created by this user.
 
 Result will look somewhat similar to this:
 ```json
@@ -134,7 +134,7 @@ Result will look somewhat similar to this:
 ```
 
 #### GET localhost:3000/api/v1/users
-User **GET** method to get all links that are in the database.
+User **GET** method to get all users that are in the database.
 
 Example output:
 ```json
@@ -151,16 +151,42 @@ Example output:
 ```
 
 #### GET localhost:3000/api/v1/users/:id
-Use **GET** to find one link by `id`.
+Use **GET** to find one user by `id`. It also will display all links that were created by this user.
 
 ```json
 {
-  "id": 3,
-  "username": "dvinov1",
+  "id": 5,
+  "username": "sdvinov",
   "password": "password",
-  "token": "pvWLGFD8KIfu3KM",
-  "createdAt": "2016-12-02T02:55:11.000Z",
-  "updatedAt": "2016-12-02T02:55:11.000Z"
+  "token": "bgjuR4xqEYkUdW3",
+  "createdAt": "2016-12-02T03:08:10.000Z",
+  "updatedAt": "2016-12-02T03:08:10.000Z",
+  "links": [
+    {
+      "id": 49,
+      "originLink": "https://vk.com/123589123456",
+      "shortLinkID": "5fb2Cai",
+      "createdAt": "2016-12-02T03:11:47.000Z",
+      "updatedAt": "2016-12-02T03:11:47.000Z",
+      "userID": 5
+    },
+    {
+      "id": 50,
+      "originLink": "https://vk.com/5678",
+      "shortLinkID": "hwdzB3R",
+      "createdAt": "2016-12-02T03:16:45.000Z",
+      "updatedAt": "2016-12-02T03:16:45.000Z",
+      "userID": 5
+    },
+    {
+      "id": 51,
+      "originLink": "https://vk.com/qwerty",
+      "shortLinkID": "Yzoo6zs",
+      "createdAt": "2016-12-02T03:16:51.000Z",
+      "updatedAt": "2016-12-02T03:16:51.000Z",
+      "userID": 5
+    }
+  ]
 }
 ```
 
