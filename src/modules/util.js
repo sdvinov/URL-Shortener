@@ -5,12 +5,7 @@ function debug(d, path, level) {
     const fs = require('fs');
     const date = new Date();
     const filePath = './logs/debug.log';
-
-    if(level) {
-      level = level.toUpperCase();
-    } else {
-      level = "Level not specified";
-    }
+    level = level.toUpperCase();
 
     if(!path) {
       path = "Path not specified";
@@ -20,7 +15,7 @@ function debug(d, path, level) {
       d = "no message";
     }
 
-    const data = `${level} [${date}] FILE: ${path} SAYS: "${d}" \n`;
+    const data = `[${date}] FILE: ${path} SAYS: "${d}" \n`;
     const logFile = fs.appendFile(filePath, data, (err) => {
       if (err) throw err;
     });
@@ -28,24 +23,29 @@ function debug(d, path, level) {
     switch (level) {
       case 'N':
       case 'NOTICE':
-        console.log(chalk.blue(data));
+        level = 'NOTICE';
+        console.log(chalk.blue(level + ' ' + data));
         break;
       case 'W':
       case 'WARN':
       case 'WARNING':
-        console.log(chalk.yellow(data));
+        level = 'WARNING';
+        console.log(chalk.yellow(level + ' ' + data));
         break;
       case 'E':
       case 'ERR':
       case 'ERROR':
-        console.log(chalk.red(data));
+        level = 'ERROR'
+        console.log(chalk.red(level + ' ' + data));
         break;
       case 'S':
       case 'SUCCESS':
-        console.log(chalk.green(data));
+        level = 'SUCCESS'
+        console.log(chalk.green(level + ' ' + data));
         break;
       default:
-        console.log(chalk.cyan(data));
+        level = "Level not specified";
+        console.log(chalk.cyan(level + ' ' + data));
         break;
     }
   }

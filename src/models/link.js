@@ -1,4 +1,6 @@
 const db = require('./db');
+const util = require('../modules/util')
+const path = 'src/models/link.js';
 
 // Create
 exports.create = (payload, err, success) => {
@@ -9,12 +11,16 @@ exports.create = (payload, err, success) => {
       { shortLinkID: payload.shortLinkID }
     ),
   }).then((dataFromFind) => {
-    // If it does not, then create this link
+    // If it does, then display this link
     if (dataFromFind) {
       success(dataFromFind);
+      util.debug('Link already exists, so new one was not created', path, 'n');
     } else {
-      // If it does not
-      db.link.create(payload).then(success).catch(err)
+      // If it does not, then create the link
+      db.link.create(payload).then(success).catch((err) => {
+        util.debug(err, path, 'e');
+      });
+      util.debug('Link was created', path, 's');
     };
   }).catch(err);
 };
@@ -22,6 +28,7 @@ exports.create = (payload, err, success) => {
 // Find all
 exports.findAll = (err, success) => {
   db.link.findAll().then(success).catch(err);
+  util.debug('All links were found', path, 's');
 };
 
 // Find one
@@ -34,7 +41,18 @@ exports.find = (payload, err, success) => {
       all: true,
       nested: true,
     }],
-  }).then(success).catch(err);
+  }).then((foundByID) => {
+    if (foundByID) {
+      success(foundByID);
+      util.debug('Link was found', path, 's');
+    } else {
+      const id = payload.id;
+      success(foundByID);
+      util.debug(`Link with ID ${id} was not found`, path, 'e');
+    }
+  }).catch((err) => {
+    util.debug(err, path, 'e');
+  });
 };
 
 // Delete
@@ -43,7 +61,11 @@ exports.destroy = (payload, err, success) => {
     where: {
       id: payload.id,
     },
-  }).then(success).catch(err);
+  }).then(success).catch((err) => {
+    util.debug(err, path, 'e');
+  });
+  const id = payload.id;
+  util.debug(`Link with id ${id} was deleted`, path, 's');
 };
 
 // Update
@@ -53,8 +75,14 @@ exports.update = (payload, err, success) => {
       id: payload.id,
     },
   }).then((existingData) => {
-    existingData.updateAttributes(payload).then(success).catch(err);
-  }).catch(err);
+    const id = payload.id;
+    existingData.updateAttributes(payload).then(success).catch((err) => {
+      util.debug(`Failed to update link with an id ${id} after finding it {${err}}`, path, 'e');
+    });
+    util.debug(`Link with an id ${id} was updated`, path, 's');
+  }).catch((err) => {
+    util.debug(`Failed to update link with an id ${id}, it was not found {${err}}`, path, 'e');
+  });
 };
 
 exports.go = (payload, err, success) => {
@@ -62,5 +90,8 @@ exports.go = (payload, err, success) => {
     where: {
       shortLinkID: payload.shortLinkID,
     },
-  }).then(success).catch(err);
+  }).then(success).catch((err) => {
+    util.debug(err, path, 'e');
+  });
+  util.debug(`Redirect success`, path, 's');
 };
