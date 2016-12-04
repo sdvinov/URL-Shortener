@@ -4,19 +4,25 @@ function debug(d, path, level) {
   if (process.env.DEBUG === "true") {
     const fs = require('fs');
     const date = new Date();
+
+    // It is watching for a logs folder in the root folder
     const filePath = './logs/debug.log';
     level = level.toUpperCase();
 
+    // If there is no path
     if(!path) {
       path = "Path not specified";
     }
 
+    // If there is no data (message)
     if(!d) {
       d = "no message";
     }
 
     const data = `[${date}] FILE: ${path} SAYS: "${d}" \n`;
 
+    // Switching colors of the messages in console, depending on the level
+    // Also in case of using a shortcut, level changes to a full name
     switch (level) {
       case 'N':
       case 'NOTICE':
@@ -45,6 +51,7 @@ function debug(d, path, level) {
         console.log(chalk.cyan(level + ' ' + data));
         break;
     }
+    // Write to the file logs/debug.log
     const logFile = fs.appendFile(filePath, level + ' ' + data, (err) => {
       if (err) throw err;
     });
