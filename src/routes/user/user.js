@@ -14,6 +14,7 @@ module.exports = (express) => {
     const password = req.body.password;
     const generate = require('./../../modules/generator');
     const token = generate.randomValue(15);
+    util.debug('route POST api/v1/user hit', path, 'n');
     // Creating the user
     link.create({ username: username, password: password, token: token }, (err) => {
       res.status(500).json((err) => {
@@ -27,6 +28,7 @@ module.exports = (express) => {
 
   // Find all
   router.get('/users', (req, res) => {
+    util.debug('route GET api/v1/users hit', path, 'n');
     link.findAll((err) => {
       res.status(500).json((err) => {
         util.debug(`Users were not found {${err}}`, path, 'e');
@@ -39,7 +41,9 @@ module.exports = (express) => {
 
   // Find one by ID
   router.get('/users/:id', (req, res) => {
-    req.body.id = req.params.id;
+    const reqBody = req.body;
+    reqBody.id = req.params.id;
+    util.debug(`route GET api/v1/users/${reqBody.id} hit`, path, 'n');
     link.find(req.body, (err) => {
       res.status(500).json((err) => {
         util.debug('User by ID was not found', path, 'e');
@@ -52,7 +56,9 @@ module.exports = (express) => {
 
   // Delete one by ID
   router.delete('/users/:id', (req, res) => {
+    const reqBody = req.body;
     req.body.id = req.params.id;
+    util.debug(`route DELETE api/v1/users/${reqBody.id} hit`, path, 'n');
     link.destroy(req.body, (err) => {
       res.status(500).json((err) => {
         util.debug(err, path, 'e');
@@ -65,7 +71,9 @@ module.exports = (express) => {
 
   // Update one by ID
   router.post('/users/:id', (req, res) => {
-    req.body.id = req.params.id;
+    const reqBody = req.body;
+    reqBody.id = req.params.id;
+    util.debug(`route POST api/v1/users/${reqBody.id} hit`, path, 'n');
     link.update(req.body, (err) => {
       res.status(500).json((err) => {
         util.debug(err, path, 'e')
