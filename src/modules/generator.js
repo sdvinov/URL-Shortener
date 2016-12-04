@@ -1,3 +1,5 @@
+const util = require('./util');
+const path = 'src/modules/generator.js';
 exports.randomValue = (charsToGenerate) => {
   let generated = '';
 
@@ -8,5 +10,6 @@ exports.randomValue = (charsToGenerate) => {
   for(let i = 0; i < charsToGenerate; i++) {
     generated += string.charAt(Math.round(Math.random() * (string.length - 1)));
   }
+  util.debug('ShortLinkID was created', path, 's')
   return generated;
 };
