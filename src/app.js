@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const util = require('./modules/util');
 
 // Using environmental variable PORT or 3000 if not specified
 const port = process.env.PORT || 3000;
@@ -13,5 +14,7 @@ app.use(bodyParser.json());
 app.use('/', require('./routes')(express));
 
 // Listening for port
-const server = app.listen(port);
+const server = app.listen(port, () => {
+  util.debug('Server running on port ' + port);
+});
 module.exports = server;
