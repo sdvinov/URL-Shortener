@@ -15,6 +15,6 @@ app.use('/', require('./routes')(express));
 
 // Listening for port
 const server = app.listen(port, () => {
-  util.debug('Server running on port ' + port);
+  util.debug('Server running on port ' + port, 'app.js', 'notice');
 });
 module.exports = server;
