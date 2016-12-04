@@ -14,6 +14,7 @@ module.exports = (express) => {
     const token = req.body.userID;
     const generate = require('./../../modules/generator');
     const linkID = generate.randomValue(7);
+    util.debug('route POST api/v1/url hit', path, 'n');
 
     // Creating a new link
     link.create({ originLink: originLink, shortLinkID: linkID, userID: token }, (err) => {
@@ -28,6 +29,7 @@ module.exports = (express) => {
 
   // Find all links
   router.get('/urls', (req, res) => {
+    util.debug('route GET api/v1/urls hit', path, 'n');
     link.findAll((err) => {
       res.status(500).json((err) => {
         util.debug(`Links were not found {${err}}`, path, 'e');
@@ -40,7 +42,9 @@ module.exports = (express) => {
 
   // Find one by ID
   router.get('/urls/:id', (req, res) => {
-    req.body.id = req.params.id;
+    const reqBody = req.body;
+    reqBody.id = req.params.id;
+    util.debug(`route GET api/v1/urls/${reqBody.id} hit`, path, 'n');
     link.find(req.body, (err) => {
       res.status(500).json((err) => {
         util.debug('Link by ID was not found', path, 'e');
@@ -53,7 +57,9 @@ module.exports = (express) => {
 
   // Delete one by ID
   router.delete('/urls/:id', (req, res) => {
-    req.body.id = req.params.id;
+    const reqBody = req.body;
+    reqBody.id = req.params.id;
+    util.debug(`route DELETE api/v1/urls/${reqBody.id} hit`, path, 'n');
     link.destroy(req.body, (err) => {
       res.status(500).json((err) => {
         util.debug(err, path, 'e');
@@ -66,7 +72,9 @@ module.exports = (express) => {
 
   // Update one by ID
   router.post('/urls/:id', (req, res) => {
-    req.body.id = req.params.id;
+    const reqBody = req.body;
+    reqBody.id = req.params.id;
+    util.debug(`route POST api/v1/urls/${reqBody.id} hit`, path, 'n');
     link.update(req.body, (err) => {
       res.status(500).json((err) => {
         util.debug(err, path, 'e')
