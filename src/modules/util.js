@@ -16,9 +16,6 @@ function debug(d, path, level) {
     }
 
     const data = `[${date}] FILE: ${path} SAYS: "${d}" \n`;
-    const logFile = fs.appendFile(filePath, data, (err) => {
-      if (err) throw err;
-    });
 
     switch (level) {
       case 'N':
@@ -48,6 +45,9 @@ function debug(d, path, level) {
         console.log(chalk.cyan(level + ' ' + data));
         break;
     }
+    const logFile = fs.appendFile(filePath, level + ' ' + data, (err) => {
+      if (err) throw err;
+    });
   }
 }
 
