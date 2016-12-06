@@ -57,7 +57,7 @@ module.exports = (express) => {
   // Delete one by ID
   router.delete('/users/:id', (req, res) => {
     const reqBody = req.body;
-    req.body.id = req.params.id;
+    reqBody.id = req.params.id;
     util.debug(`route DELETE api/v1/users/${reqBody.id} hit`, path, 'n');
     link.destroy(req.body, (err) => {
       res.status(500).json((err) => {
@@ -76,7 +76,7 @@ module.exports = (express) => {
     util.debug(`route POST api/v1/users/${reqBody.id} hit`, path, 'n');
     link.update(req.body, (err) => {
       res.status(500).json((err) => {
-        util.debug(err, path, 'e')
+        util.debug(err, path, 'e');
       });
     }, (data) => {
       res.json(data);

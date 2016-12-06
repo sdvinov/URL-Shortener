@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 
 function debug(d, path, level) {
-  if (process.env.DEBUG === "true") {
+  if (process.env.DEBUG === 'true') {
     const fs = require('fs');
     const date = new Date();
 

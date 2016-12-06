@@ -18,8 +18,8 @@ module.exports = (express) => {
 
     // Creating a new link
     link.create({ originLink: originLink, shortLinkID: linkID, userID: token }, (err) => {
-      res.status(500).json((err) => {
-        util.debug(`Link was not created {${err}}`, path, 'e');
+      res.status(500).json((error) => {
+        util.debug(`Link was not created {${error}}`, path, 'e');
       });
     }, (data) => {
       res.json(data);
@@ -31,8 +31,8 @@ module.exports = (express) => {
   router.get('/urls', (req, res) => {
     util.debug('route GET api/v1/urls hit', path, 'n');
     link.findAll((err) => {
-      res.status(500).json((err) => {
-        util.debug(`Links were not found {${err}}`, path, 'e');
+      res.status(500).json((error) => {
+        util.debug(`Links were not found {${error}}`, path, 'e');
       });
     }, (data) => {
       res.json(data);
@@ -60,13 +60,13 @@ module.exports = (express) => {
     const reqBody = req.body;
     reqBody.id = req.params.id;
     util.debug(`route DELETE api/v1/urls/${reqBody.id} hit`, path, 'n');
-    link.destroy(req.body, (err) => {
-      res.status(500).json((err) => {
-        util.debug(err, path, 'e');
+    link.destroy(req.body, (error) => {
+      res.status(500).json((error) => {
+        util.debug(error, path, 'e');
       });
     }, (data) => {
       res.json(data);
-      util.debug(`Link was deleted`, path, 's');
+      util.debug('Link was deleted', path, 's');
     });
   });
 
@@ -75,9 +75,9 @@ module.exports = (express) => {
     const reqBody = req.body;
     reqBody.id = req.params.id;
     util.debug(`route POST api/v1/urls/${reqBody.id} hit`, path, 'n');
-    link.update(req.body, (err) => {
-      res.status(500).json((err) => {
-        util.debug(err, path, 'e')
+    link.update(req.body, (error) => {
+      res.status(500).json((error) => {
+        util.debug(error, path, 'e');
       });
     }, (data) => {
       res.json(data);

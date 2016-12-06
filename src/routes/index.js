@@ -1,5 +1,4 @@
 module.exports = (express) => {
-
   // Enabeling router
   const router = express.Router();
 
