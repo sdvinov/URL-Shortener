@@ -1,6 +1,5 @@
 const chalk = require('chalk');
-
-function debug(d, path, level) {
+function debug(inputMessage, path, level) {
   if (process.env.DEBUG === "true") {
     const fs = require('fs');
     const date = new Date();
@@ -15,11 +14,11 @@ function debug(d, path, level) {
     }
 
     // If there is no data (message)
-    if(!d) {
-      d = "no message";
+    if(!inputMessage) {
+      inputMessage = "no message";
     }
 
-    const data = `[${date}] FILE: ${path} SAYS: "${d}" \n`;
+    const formattedMessage = `[${date}] FILE: ${path} SAYS: "${inputMessage}" \n`;
 
     // Switching colors of the messages in console, depending on the level
     // Also in case of using a shortcut, level changes to a full name
@@ -27,32 +26,32 @@ function debug(d, path, level) {
       case 'N':
       case 'NOTICE':
         level = 'NOTICE';
-        console.log(chalk.blue(level + ' ' + data));
+        console.log(chalk.blue(level + ' ' + formattedMessage));
         break;
       case 'W':
       case 'WARN':
       case 'WARNING':
         level = 'WARNING';
-        console.log(chalk.yellow(level + ' ' + data));
+        console.log(chalk.yellow(level + ' ' + formattedMessage));
         break;
       case 'E':
       case 'ERR':
       case 'ERROR':
         level = 'ERROR'
-        console.log(chalk.red(level + ' ' + data));
+        console.log(chalk.red(level + ' ' + formattedMessage));
         break;
       case 'S':
       case 'SUCCESS':
         level = 'SUCCESS'
-        console.log(chalk.green(level + ' ' + data));
+        console.log(chalk.green(level + ' ' + formattedMessage));
         break;
       default:
         level = "Level not specified";
-        console.log(chalk.cyan(level + ' ' + data));
+        console.log(chalk.cyan(level + ' ' + formattedMessage));
         break;
     }
     // Write to the file logs/debug.log
-    const logFile = fs.appendFile(filePath, level + ' ' + data, (err) => {
+    const logFile = fs.appendFile(filePath, level + ' ' + formattedMessage, (err) => {
       if (err) throw err;
     });
   }
