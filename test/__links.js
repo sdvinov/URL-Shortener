@@ -29,7 +29,7 @@ describe('Links model test', () => {
     links.go(fakeLink.shortLinkID, (err) => {
       util.debug(`Could not redirect {${err}}`, path, 'e');
     }, (link) => {
-      expect(link.originLink).to.be.equal(fakeLink.shortLinkID);
+      expect(link.shortLinkID).to.be.equal(fakeLink.shortLinkID);
       done();
     });
   });
