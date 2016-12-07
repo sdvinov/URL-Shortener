@@ -5,7 +5,6 @@ const generate = require('./../src/modules/generator');
 const path = 'test/__links.js';
 
 describe('Links model test', () => {
-
   // Fake link
   const shortID = generate.randomValue(7);
   let fakeLink = {

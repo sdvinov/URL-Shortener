@@ -4,16 +4,16 @@ const path = 'src/models/user.js';
 
 // Create
 exports.create = (payload, err, success) => {
-  db.user.create(payload).then(success).catch((err) => {
-    util.debug(`User was not created {${err}}`, path, 'e');
+  db.user.create(payload).then(success).catch((error) => {
+    util.debug(`User was not created {${error}}`, path, 'e');
   });
   util.debug('User was created', path, 's');
 };
 
 // Find all
 exports.findAll = (err, success) => {
-  db.user.findAll().then(success).catch((err) => {
-    util.debug(`Users were not found {${err}}`, path, 'e');
+  db.user.findAll().then(success).catch((error) => {
+    util.debug(`Users were not found {${error}}`, path, 'e');
   });
   util.debug('Users were found', path, 's');
 };
@@ -28,8 +28,8 @@ exports.find = (payload, err, success) => {
       all: true,
       nested: true,
     }],
-  }).then(success).catch((err) => {
-    util.debug(`User was not found {${err}}`, path, 'e');
+  }).then(success).catch((error) => {
+    util.debug(`User was not found {${error}}`, path, 'e');
   });
   util.debug('User was found', path, 's');
 };
@@ -40,8 +40,8 @@ exports.destroy = (payload, err, success) => {
     where: {
       id: payload.id,
     },
-  }).then(success).catch((err) => {
-    util.debug(`User was not deleted {${err}}`, path, 'e');
+  }).then(success).catch((error) => {
+    util.debug(`User was not deleted {${error}}`, path, 'e');
   });
   util.debug('User was deleted', path, 's');
 };
@@ -53,11 +53,11 @@ exports.update = (payload, err, success) => {
       id: payload.id,
     },
   }).then((existingData) => {
-    existingData.updateAttributes(payload).then(success).catch((err) => {
-      util.debug(`User was not updated after finding {${err}}`, path, 'e');
+    existingData.updateAttributes(payload).then(success).catch((error) => {
+      util.debug(`User was not updated after finding {${error}}`, path, 'e');
     });
     util.debug('User was updated', path, 's');
-  }).catch((err) => {
-    util.debug(`User was not deleted and was not found {${err}}`, path, 'e');
+  }).catch((error) => {
+    util.debug(`User was not deleted and was not found {${error}}`, path, 'e');
   });
 };
