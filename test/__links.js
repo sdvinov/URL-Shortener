@@ -24,6 +24,16 @@ describe('Links model test', () => {
     });
   });
 
+  // Redirect
+  it('Should redirect', (done) => {
+    links.go(fakeLink.shortLinkID, (err) => {
+      util.debug(`Could not redirect {${err}}`, path, 'e');
+    }, (link) => {
+      expect(link.originLink).to.be.equal(fakeLink.shortLinkID);
+      done();
+    });
+  });
+
   // Read all
   it('Should read all', (done) => {
     links.findAll((err) => {
@@ -58,7 +68,7 @@ describe('Links model test', () => {
   // Delete
   it('Should delete', (done) => {
     links.destroy(fakeLink, (err) => {
-      util.debug(`User was not deleted {${err}}`, path, 'e');
+      util.debug(`Link was not deleted {${err}}`, path, 'e');
     }, (success) => {
       expect(success).to.be.equal(1);
       done();
