@@ -24,9 +24,10 @@ describe('Links model test', () => {
   // });
 
   it('Should read all', (done) => {
-    links.findAll((links) => {
-      const allLinks = links;
-      expect(allLinks.length).to.be.above(0);
+    links.findAll((err) => {
+      util.debug('All users were not found', path, 'e');
+    }, (links) => {
+      expect(links.length).to.be.above(0);
       done();
     });
   });
