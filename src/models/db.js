@@ -43,7 +43,7 @@ const user = sequelize.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true,
-  }
+  },
 });
 
 // Creating a foreign key

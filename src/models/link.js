@@ -1,12 +1,12 @@
 const db = require('./db');
-const util = require('../modules/util')
+const util = require('../modules/util');
 const path = 'src/models/link.js';
 
 // Create
 exports.create = (payload, err, success) => {
   db.link.find({
     // Checking if database has originLink OR shortLinkID already
-    where: db.Sequelize.or (
+    where: db.Sequelize.or(
       { originLink: payload.originLink },
       { shortLinkID: payload.shortLinkID }
     ),
@@ -17,11 +17,11 @@ exports.create = (payload, err, success) => {
       util.debug('Link already exists, so new one was not created', path, 'n');
     } else {
       // If it does not, then create the link
-      db.link.create(payload).then(success).catch((err) => {
-        util.debug(err, path, 'e');
+      db.link.create(payload).then(success).catch((error) => {
+        util.debug(error, path, 'e');
       });
       util.debug('Link was created', path, 's');
-    };
+    }
   }).catch(err);
 };
 
@@ -51,13 +51,13 @@ exports.find = (payload, err, success) => {
       success(foundByID);
       util.debug(`Link with ID ${id} was not found`, path, 'e');
     }
-  }).catch((err) => {
-    util.debug(err, path, 'e');
+  }).catch((error) => {
+    util.debug(error, path, 'e');
   });
 };
 
 // Delete
-exports.destroy = (payload, err, success) => {
+exports.destroy = (payload, error, success) => {
   db.link.destroy({
     where: {
       id: payload.id,
@@ -77,12 +77,12 @@ exports.update = (payload, err, success) => {
     },
   }).then((existingData) => {
     const id = payload.id;
-    existingData.updateAttributes(payload).then(success).catch((err) => {
-      util.debug(`Failed to update link with an id ${id} after finding it {${err}}`, path, 'e');
+    existingData.updateAttributes(payload).then(success).catch((error) => {
+      util.debug(`Failed to update link with an id ${id} after finding it {${error}}`, path, 'e');
     });
     util.debug(`Link with an id ${id} was updated`, path, 's');
-  }).catch((err) => {
-    util.debug(`Failed to update link with an id ${id}, it was not found {${err}}`, path, 'e');
+  }).catch((error) => {
+    util.debug(`Failed to update link, it was not found {${error}}`, path, 'e');
   });
 };
 
@@ -91,8 +91,8 @@ exports.go = (payload, err, success) => {
     where: {
       shortLinkID: payload.shortLinkID,
     },
-  }).then(success).catch((err) => {
-    util.debug(err, path, 'e');
+  }).then(success).catch((error) => {
+    util.debug(error, path, 'e');
   });
-  util.debug(`Redirect success`, path, 's');
+  util.debug('Redirect success', path, 's');
 };
