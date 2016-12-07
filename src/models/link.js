@@ -43,8 +43,9 @@ exports.find = (payload, err, success) => {
     }],
   }).then((foundByID) => {
     if (foundByID) {
+      const id = payload.id;
       success(foundByID);
-      util.debug('Link was found', path, 's');
+      util.debug(`Link with ID ${id} was found`, path, 's');
     } else {
       const id = payload.id;
       success(foundByID);
