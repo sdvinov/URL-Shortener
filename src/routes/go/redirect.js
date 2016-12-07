@@ -12,9 +12,8 @@ module.exports = (express) => {
     // Finding it in the db
     util.debug(`route GET go/${reqBody.shortLinkID} hit`, path, 'n');
     link.go(req.body, (err) => {
-      res.status(500).json((err) => {
-        util.debug(err, path, 'e');
-      });
+      res.status(500).json(err);
+      util.debug(err, path, 'e');
     }, (data) => {
       // Redirect to URL to which this ID beonged
       res.redirect(data.originLink);
