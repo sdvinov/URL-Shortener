@@ -237,7 +237,7 @@ Debug tool spits data to console and to `logs/debug.log` file. In console messag
 If you want to contribute to this code, consider using coding styleguide. I am using [ESLint](http://eslint.org/) on [Atom](https://atom.io/). To get it working, you will need [AtomLinter package](https://github.com/AtomLinter/linter-eslint). To install it, run this command:
 `apm install linter-eslint`
 
-Create `.eslintrc.json` file in the root folder of your project. You can use [these rules](https://gist.github.com/reactivepixel/ca827b418bb9068b60f88793b34bd1c0).
+Create `.eslintrc.json` file in the root folder of your project. You can use [these rules](https://gist.github.com/reactivepixel/ca827b418bb9068b60f88793b34bd1c0). Full list of rules is [here](http://eslint.org/docs/rules/).
 
 Since ESLint comes to your machine broken because of version conflict in its' dependencies, here is a working list of versions:
 ```
