@@ -38,8 +38,8 @@ describe('Links model test', () => {
   it('Should read by ID', (done) => {
     links.find((err) => {
       util.debug('Link by ID was not found', path, 'e');
-    }, (link) {
-      
+    }, (link) => {
+
     });
   });
 
