@@ -1,58 +1,60 @@
 const chalk = require('chalk');
 
-function debug(d, path, level) {
+function debug(message, path, level) {
   if (process.env.DEBUG === 'true') {
     const fs = require('fs');
     const date = new Date();
+    let messageLevel = level.toUpperCase();
+    let messageOrigin = path;
+    let messageContents = message;
 
     // It is watching for a logs folder in the root folder
     const filePath = './logs/debug.log';
-    level = level.toUpperCase();
 
     // If there is no path
-    if(!path) {
-      path = "Path not specified";
+    if (!messageOrigin) {
+      messageOrigin = 'Path not specified';
     }
 
     // If there is no data (message)
-    if(!d) {
-      d = "no message";
+    if (!messageContents) {
+      messageContents = 'no message';
     }
 
-    const data = `[${date}] FILE: ${path} SAYS: "${d}" \n`;
+    const data = `[${date}] FILE: ${path} SAYS: "${messageContents}" \n`;
 
     // Switching colors of the messages in console, depending on the level
     // Also in case of using a shortcut, level changes to a full name
-    switch (level) {
+    switch (messageLevel) {
       case 'N':
       case 'NOTICE':
-        level = 'NOTICE';
-        console.log(chalk.blue(level + ' ' + data));
+        messageLevel = 'NOTICE';
+        console.log(chalk.blue(messageLevel + ' ' + data));
         break;
       case 'W':
       case 'WARN':
       case 'WARNING':
-        level = 'WARNING';
-        console.log(chalk.yellow(level + ' ' + data));
+        messageLevel = 'WARNING';
+        console.log(chalk.yellow(messageLevel + ' ' + data));
         break;
       case 'E':
       case 'ERR':
       case 'ERROR':
-        level = 'ERROR'
-        console.log(chalk.red(level + ' ' + data));
+        messageLevel = 'ERROR';
+        console.log(chalk.red(messageLevel + ' ' + data));
         break;
       case 'S':
       case 'SUCCESS':
-        level = 'SUCCESS'
-        console.log(chalk.green(level + ' ' + data));
+        messageLevel = 'SUCCESS';
+        console.log(chalk.green(messageLevel + ' ' + data));
         break;
       default:
-        level = "Level not specified";
-        console.log(chalk.cyan(level + ' ' + data));
+        messageLevel = 'Level not specified';
+        console.log(chalk.cyan(messageLevel + ' ' + data));
         break;
     }
     // Write to the file logs/debug.log
-    const logFile = fs.appendFile(filePath, level + ' ' + data, (err) => {
+    fs.appendFile(filePath, messageLevel + ' ' + data, (err) => {
       if (err) throw err;
     });
   }

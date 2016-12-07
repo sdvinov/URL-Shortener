@@ -61,8 +61,8 @@ exports.destroy = (payload, error, success) => {
     where: {
       id: payload.id,
     },
-  }).then(success).catch((error) => {
-    util.debug(error, path, 'e');
+  }).then(success).catch((err) => {
+    util.debug(err, path, 'e');
   });
   const id = payload.id;
   util.debug(`Link with id ${id} was deleted`, path, 's');
