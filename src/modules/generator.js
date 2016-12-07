@@ -7,9 +7,9 @@ exports.randomValue = (charsToGenerate) => {
   const string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
   // Creating the random value
-  for(let i = 0; i < charsToGenerate; i++) {
+  for (let i = 0; i < charsToGenerate; i++) {
     generated += string.charAt(Math.round(Math.random() * (string.length - 1)));
   }
-  util.debug('ShortLinkID was created', path, 's')
+  util.debug('ShortLinkID was created', path, 's');
   return generated;
 };
