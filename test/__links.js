@@ -49,11 +49,12 @@ describe('Links model test', () => {
 
   // Update
   it('Should update by ID', (done) => {
-    newFakeLink.originLink = 'http://github.com/sdvinov/URL-Shortener';
+    fakeLink.originLink = 'http://github.com/sdvinov/URL-Shortener';
     links.update(fakeLink, (err) => {
       util.debug('Link was updated', path, 'e');
     }, (link) => {
-      expect(link.originLink).to.be.equal(newFakeLink.originLink);
+      expect(link.originLink).to.be.equal(fakeLink.originLink);
+      done();
     });
   });
 
