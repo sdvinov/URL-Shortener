@@ -26,9 +26,9 @@ DEBUG =
 
 ## Using
 ### URLS
-#### POST localhost:3000/api/v1/url
+#### POST /api/v1/url
 
-Use **POST** method to send the link you want to shorten. At this point, `link` is not validated in any way, so it can be pretty much anything. It is expected that you pass the link in the `link` field. Use `userID` field to identify which user created that link. **GET localhost:3000/api/v1/users/:id** will display links created by this user.
+Use **POST** method to send the link you want to shorten. At this point, `link` is not validated in any way, so it can be pretty much anything. It is expected that you pass the link in the `link` field. Use `userID` field to identify which user created that link. **GET /api/v1/users/:id** will display links created by this user.
 
 Result will look somewhat similar to this:
 ```json
@@ -42,7 +42,7 @@ Result will look somewhat similar to this:
 }
 ```
 
-#### GET localhost:3000/api/v1/urls
+#### GET /api/v1/urls
 User **GET** method to get all links that are in the database.
 
 Example output:
@@ -75,7 +75,7 @@ Example output:
 ]
 ```
 
-#### GET localhost:3000/api/v1/urls/:id
+#### GET /api/v1/urls/:id
 Use **GET** to find one link by `id`.
 
 ```json
@@ -89,7 +89,7 @@ Use **GET** to find one link by `id`.
 }
 ```
 
-#### POST localhost:3000/api/v1/urls/:id
+#### POST /api/v1/urls/:id
 Use **POST** method to update the entry.
 
 ```json
@@ -105,7 +105,7 @@ Use **POST** method to update the entry.
 
 Note: for this method use `originLink` instead of `link`.
 
-#### DELETE localhost:3000/api/v1/urls/:id
+#### DELETE /api/v1/urls/:id
 Use **DELETE** method to delete the entry.
 
 ```json
@@ -114,11 +114,11 @@ Use **DELETE** method to delete the entry.
 
 Note: `1` means success. `0` means it did not delete anything, which means, it cannot find this ID in the database.
 
-#### GET localhost:3000/go/:shortLinkID
+#### GET /go/:shortLinkID
 This route will find this ID in the database and a corresponding origin link. Then it will redirect you to that origin link.
 
 ### Users
-#### POST localhost:3000/api/v1/user
+#### POST /api/v1/user
 
 Use **POST** method to send the account credentials. It expected to get fields `username` and `password`. Hashing is coming right up.
 
@@ -134,7 +134,7 @@ Result will look somewhat similar to this:
 }
 ```
 
-#### GET localhost:3000/api/v1/users
+#### GET /api/v1/users
 User **GET** method to get all users that are in the database.
 
 Example output:
@@ -151,7 +151,7 @@ Example output:
 ]
 ```
 
-#### GET localhost:3000/api/v1/users/:id
+#### GET /api/v1/users/:id
 Use **GET** to find one user by `id`. It also will display all links that were created by this user.
 
 ```json
@@ -191,7 +191,7 @@ Use **GET** to find one user by `id`. It also will display all links that were c
 }
 ```
 
-#### POST localhost:3000/api/v1/users/:id
+#### POST /api/v1/users/:id
 Use **POST** method to update the entry.
 
 ```json
@@ -207,7 +207,7 @@ Use **POST** method to update the entry.
 
 Note: for this method use `originLink` instead of `link`.
 
-#### DELETE localhost:3000/api/v1/users/:id
+#### DELETE /api/v1/users/:id
 Use **DELETE** method to delete the entry.
 
 ```json
@@ -232,3 +232,20 @@ The file is located in `src/modules/util.js`. It accepts 3 arguments: `data`, `p
 Debug tool spits data to console and to `logs/debug.log` file. In console messages are colored, depending on the level. There are 4 levels of messages: `notice` (or `n`), `success` (or `s`), `warning` (or `w`, or `warn`), and `error` (or `e`, or `err`). They are colored in blue, green, yellow, and red respectively. In log file the messages may look somewhat like this:
 
 `NOTICE [Sat Dec 03 2016 21:33:15 GMT-0500 (EST)] FILE: src/app.js SAYS: "Server running on port 3000" `
+
+## Styleguide
+If you want to contribute to this code, consider using coding styleguide. I am using [ESLint](http://eslint.org/) on [Atom](https://atom.io/). To get it working, you will need [AtomLinter package](https://github.com/AtomLinter/linter-eslint). To install it, run this command:
+`apm install linter-eslint`
+
+Create `.eslintrc.json` file in the root folder of your project. You can use [these rules](https://gist.github.com/reactivepixel/ca827b418bb9068b60f88793b34bd1c0).
+
+Since ESLint comes to your machine broken because of version conflict in its' dependencies, here is a working list of versions:
+```
+"eslint": "3.11.1",
+"eslint-config-airbnb": "9.0.1",
+"eslint-plugin-import": "1.16.0",
+"eslint-plugin-jsx-a11y": "1.5.5",
+"eslint-plugin-react": "5.2.2",
+```
+
+Add it to your `package.json` file to `devDependencies`.
