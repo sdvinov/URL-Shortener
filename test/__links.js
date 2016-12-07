@@ -5,6 +5,8 @@ const generate = require('./../src/modules/generator');
 const path = 'test/__links.js';
 
 describe('Links model test', () => {
+
+  // Fake link
   const shortID = generate.randomValue(7);
   let fakeLink = {
     id: 9999,
@@ -12,8 +14,7 @@ describe('Links model test', () => {
     shortLinkID: shortID,
   };
 
-  let fakeId;
-
+  // Create
   it('Should create', (done) => {
     links.create(fakeLink, (err) => {
       util.debug(`Link was not created {${err}}`, path, 'e');
@@ -26,6 +27,7 @@ describe('Links model test', () => {
     });
   });
 
+  // Read all
   it('Should read all', (done) => {
     links.findAll((err) => {
       util.debug('All links were not found', path, 'e');
@@ -35,14 +37,27 @@ describe('Links model test', () => {
     });
   });
 
+  // Find one
   it('Should read by ID', (done) => {
-    links.find((err) => {
+    links.find(fakeLink, (err) => {
       util.debug('Link by ID was not found', path, 'e');
     }, (link) => {
-
+      expect(link.id).to.be.equal(fakeLink.id);
+      done();
     });
   });
 
+  // Update
+  it('Should update by ID', (done) => {
+    newFakeLink.originLink = 'http://github.com/sdvinov/URL-Shortener';
+    links.update(fakeLink, (err) => {
+      util.debug('Link was updated', path, 'e');
+    }, (link) => {
+      expect(link.originLink).to.be.equal(newFakeLink.originLink);
+    });
+  });
+
+  // Delete
   it('Should delete', (done) => {
     links.destroy(fakeLink, (err) => {
       util.debug('Link was not deleted', path, 'e');
