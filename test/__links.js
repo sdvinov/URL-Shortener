@@ -24,16 +24,6 @@ describe('Links model test', () => {
     });
   });
 
-  // Redirect
-  it('Should redirect', (done) => {
-    links.go(fakeLink.shortLinkID, (err) => {
-      util.debug(`Could not redirect {${err}}`, path, 'e');
-    }, (link) => {
-      expect(link.shortLinkID).to.be.equal(fakeLink.shortLinkID);
-      done();
-    });
-  });
-
   // Read all
   it('Should read all', (done) => {
     links.findAll((err) => {

@@ -6,10 +6,7 @@ const path = 'src/models/link.js';
 exports.create = (payload, err, success) => {
   db.link.find({
     // Checking if database has originLink OR shortLinkID already
-    where: db.Sequelize.or(
-      { originLink: payload.originLink },
-      { shortLinkID: payload.shortLinkID }
-    ),
+    where: payload,
   }).then((dataFromFind) => {
     // If it does, then display this link
     if (dataFromFind) {
@@ -34,26 +31,15 @@ exports.findAll = (err, success) => {
 // Find one
 exports.find = (payload, err, success) => {
   db.link.find({
-    where: {
-      id: payload.id,
-    },
+    where: payload,
     include: [{
       all: true,
       nested: true,
     }],
-  }).then((foundByID) => {
-    if (foundByID) {
-      const id = payload.id;
-      success(foundByID);
-      util.debug(`Link with ID ${id} was found`, path, 's');
-    } else {
-      const id = payload.id;
-      success(foundByID);
-      util.debug(`Link with ID ${id} was not found`, path, 'e');
-    }
-  }).catch((error) => {
+  }).then(success).catch((error) => {
     util.debug(error, path, 'e');
   });
+  util.debug('Link was found', path, 's');
 };
 
 // Delete
