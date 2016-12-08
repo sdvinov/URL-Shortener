@@ -71,14 +71,3 @@ exports.update = (payload, err, success) => {
     util.debug(`Failed to update link, it was not found {${error}}`, path, 'e');
   });
 };
-
-exports.go = (payload, err, success) => {
-  db.link.find({
-    where: {
-      shortLinkID: payload.shortLinkID,
-    },
-  }).then(success).catch((error) => {
-    util.debug(error, path, 'e');
-  });
-  util.debug('Redirect success', path, 's');
-};
