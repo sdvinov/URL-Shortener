@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const users = require('./../src/models/user');
-const util = require('./../src/modules/util');
+const util = require('utility-tool-sd');
 const generate = require('./../src/modules/generator');
 const path = 'test/__user.js';
 

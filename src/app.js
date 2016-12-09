@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const util = require('./modules/util');
+const util = require('utility-tool-sd');
 
 // Using environmental variable PORT or 3000 if not specified
 const port = process.env.PORT || 3000;

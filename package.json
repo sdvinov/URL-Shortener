@@ -25,6 +25,7 @@
     "eslint-plugin-jsx-a11y": "1.5.5",
     "eslint-plugin-react": "5.2.2",
     "mocha": "3.2.0",
-    "supertest": "^2.0.1"
+    "supertest": "2.0.1",
+    "utility-tool-sd": "^1.0.0"
   }
 }
