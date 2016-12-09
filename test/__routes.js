@@ -1,6 +1,4 @@
 const request = require('supertest');
-const expect = require('chai').expect;
-const generate = require('../src/modules/generator');
 
 const allRoutes = [
   {
@@ -9,24 +7,34 @@ const allRoutes = [
     method: 'get',
   },
   {
-    testName: 'Get one link (GET /api/v1/url/:id)',
-    url: '/api/v1/url/:id',
+    testName: 'Get one link (GET /api/v1/urls/:id)',
+    url: '/api/v1/urls/:id',
     method: 'get',
   },
-  {
-    testName: 'Get redirected (GET /go/:shortLinkID',
-    url: '/go/:shortLinkID',
-    method: 'get',
-  },
+  // {
+  //   testName: 'Get redirected (GET /go/:shortLinkID',
+  //   url: '/go/:shortLinkID',
+  //   method: 'get',
+  // },
   {
     testName: 'Get all users (GET /api/v1/users)',
     url: '/api/v1/users',
     method: 'get',
   },
   {
-    testName: 'Get one user (GET /api/v1/user/:id)',
-    url: '/api/v1/user/:id',
+    testName: 'Get one user (GET /api/v1/users/:id)',
+    url: '/api/v1/users/:id',
     method: 'get',
+  },
+  {
+    testName: 'Delete link (DELETE /api/v1/urls/:id)',
+    url: '/api/v1/urls/:id',
+    method: 'delete',
+  },
+  {
+    testName: 'Delete a user (DELETE /api/v1/users/:id)',
+    url: '/api/v1/users/:id',
+    method: 'delete',
   },
   {
     testName: 'Post new link (POST /api/v1/url)',
@@ -48,16 +56,6 @@ const allRoutes = [
     url: '/api/v1/users/:id',
     method: 'post',
   },
-  {
-    testName: 'Delete link (DELETE /api/v1/urls/:id)',
-    url: '/api/v1/urls/:id',
-    method: 'delete',
-  },
-  {
-    testName: 'Delete a user (POST /api/v1/users/:id)',
-    url: '/api/v1/users/:id',
-    method: 'post',
-  },
 ];
 
 describe('Routes tests', () => {
@@ -69,41 +67,37 @@ describe('Routes tests', () => {
   afterEach(() => {
     server.close();
   });
-
-  it('GET /api/v1/urls', (done) => {
-    request(server)
-      .get('api/v1/urls')
-      .set('Accept', 'serverlication/json')
-      .expect('Content-Type', /json/)
-      .expect(200)
-      .end(done);
-  });
-
-  it('POST /api/v1/url', (done) => {
-    request(server)
-      .post('api/v1/url')
-      .set('Accept', 'serverlication/json')
-      .expect('Content-Type', /json/)
-      .send(fakeLink)
-      .expect(200)
-      .end(done);
-  });
-
-  it('GET /api/v1/url/:id', (done) => {
-    request(server)
-      .get('api/v1/url/:id')
-      .set('Accept', 'serverlication/json')
-      .expect('Content-Type', /json/)
-      .expect(200)
-      .end(done);
-  });
-
-  it('DELETE /api/v1/url/:id', (done) => {
-    request(server)
-      .delete('api/v1/url/:id')
-      .set('Accept', 'serverlication/json')
-      .expect('Content-Type', /json/)
-      .expect(200)
-      .end(done);
-  });
+  for (let route = 0; route < allRoutes.length; route++) {
+    it(allRoutes[route].testName, (done) => {
+      switch (allRoutes[route].method) {
+        case 'get':
+          request(server)
+            .get(allRoutes[route].url)
+            .set('Accept', 'serverlication/json')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end(done);
+          break;
+        case 'post':
+          request(server)
+            .post(allRoutes[route].url)
+            .send(123)
+            .set('Accept', 'serverlication/json')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end(done);
+          break;
+        case 'delete':
+          request(server)
+            .delete(allRoutes[route].url)
+            .set('Accept', 'serverlication/json')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end(done);
+          break;
+        default:
+          console.log('something went wrong');
+      }
+    });
+  }
 });
