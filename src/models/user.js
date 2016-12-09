@@ -1,5 +1,5 @@
 const db = require('./db');
-const util = require('./../modules/util');
+const util = require('utility-tool-sd');
 const path = 'src/models/user.js';
 
 // Create

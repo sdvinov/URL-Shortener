@@ -1,4 +1,4 @@
-const util = require('./util');
+const util = require('utility-tool-sd');
 const path = 'src/modules/generator.js';
 exports.randomValue = (charsToGenerate) => {
   let generated = '';

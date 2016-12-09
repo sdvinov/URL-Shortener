@@ -1,5 +1,5 @@
 const link = require('./../../models/link');
-const util = require('./../../modules/util');
+const util = require('utility-tool-sd');
 const path = 'src/routes/api/api.js';
 
 module.exports = (express) => {

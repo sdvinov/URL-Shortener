@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const links = require('./../src/models/link');
-const util = require('./../src/modules/util');
+const util = require('utility-tool-sd');
 const generate = require('./../src/modules/generator');
 const path = 'test/__links.js';
 
@@ -19,16 +19,6 @@ describe('Links model test', () => {
       util.debug(`Link was not created {${err}}`, path, 'e');
     }, (link) => {
       expect(link.originLink).to.be.equal(fakeLink.originLink);
-      expect(link.shortLinkID).to.be.equal(fakeLink.shortLinkID);
-      done();
-    });
-  });
-
-  // Redirect
-  it('Should redirect', (done) => {
-    links.go(fakeLink.shortLinkID, (err) => {
-      util.debug(`Could not redirect {${err}}`, path, 'e');
-    }, (link) => {
       expect(link.shortLinkID).to.be.equal(fakeLink.shortLinkID);
       done();
     });
