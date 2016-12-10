@@ -11,11 +11,11 @@ const allRoutes = [
     url: '/api/v1/urls/:id',
     method: 'get',
   },
-  // {
-  //   testName: 'Get redirected (GET /go/:shortLinkID',
-  //   url: '/go/:shortLinkID',
-  //   method: 'get',
-  // },
+  {
+    testName: 'Get redirected (GET /go/:shortLinkID',
+    url: '/go/:shortLinkID',
+    method: 'get',
+  },
   {
     testName: 'Get all users (GET /api/v1/users)',
     url: '/api/v1/users',
@@ -59,7 +59,9 @@ const allRoutes = [
 ];
 
 describe('Routes tests', () => {
+
   let server;
+
   beforeEach(() => {
     server = require('./../src/app');
   });
@@ -67,8 +69,9 @@ describe('Routes tests', () => {
   afterEach(() => {
     server.close();
   });
+
   for (let route = 0; route < allRoutes.length; route++) {
-    it(allRoutes[route].testName, (done) => {
+    it(allRoutes[route].testName, () => {
       switch (allRoutes[route].method) {
         case 'get':
           request(server)
@@ -76,16 +79,15 @@ describe('Routes tests', () => {
             .set('Accept', 'serverlication/json')
             .expect('Content-Type', /json/)
             .expect(200)
-            .end(done);
+            .end();
           break;
         case 'post':
           request(server)
             .post(allRoutes[route].url)
-            .send(123)
             .set('Accept', 'serverlication/json')
             .expect('Content-Type', /json/)
             .expect(200)
-            .end(done);
+            .end();
           break;
         case 'delete':
           request(server)
@@ -93,7 +95,7 @@ describe('Routes tests', () => {
             .set('Accept', 'serverlication/json')
             .expect('Content-Type', /json/)
             .expect(200)
-            .end(done);
+            .end();
           break;
         default:
           console.log('something went wrong');
