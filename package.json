@@ -1,6 +1,10 @@
 {
   "name": "short.me",
   "version": "1.0.0",
+  "engines": {
+    "node": "v6.8.1",
+    "npm": "v3.10.8"
+  },
   "description": "Links shortener",
   "main": "src/app.js",
   "scripts": {
