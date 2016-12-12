@@ -1,12 +1,12 @@
 {
   "name": "short.me",
   "version": "1.0.0",
+  "engines": {
+    "node": "v6.8.1",
+    "npm": "v3.10.8"
+  },
   "description": "Links shortener",
   "main": "src/app.js",
-  "engines": {
-    "node": "v6.7.0",
-    "npm": "3.10.3"
-  },
   "scripts": {
     "start": "node src/app.js",
     "test": "mocha"
@@ -22,7 +22,7 @@
   "devDependencies": {
     "chai": "3.5.0",
     "chalk": "1.1.3",
-    "localenvironment": "1.0.2",
+    "dotenv": "2.0.0",
     "eslint": "3.11.1",
     "eslint-config-airbnb": "9.0.1",
     "eslint-plugin-import": "1.16.0",
