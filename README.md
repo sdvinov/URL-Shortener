@@ -240,24 +240,35 @@ This API is also available on [Heroku](https://urlshortenersd-prod.herokuapp.com
 Feature branch development is essentially development of one feature on a separate branch (not master). If you work on your code with somebody, you will continuously fight over master branch - numerous push conflicts and so on.
 
 To create a branch, type this command:
+
 `git checkout -b branchName`
 
 Now you have a branch in your local repo, but Github still does not know this branch exists. To fix that, run:
+
 `git add -A` (`-A` means `all`)
+
 `git commit message "Your message goes here"`
+
 `git push --set-upstream origin branchName`
 
 The last command has to be run just for one time. After you run this command, you can use just:
+
 `git push`
 
 Now your commit is up on Github and you have a branch set up. Commit as many more code as you need. After you are done developing and testing (using [codeship](https://codeship.com/), for example), you are ready to merge this branch with master branch and create a new release.
 
 `git checkout master` - go back to master branch.
+
 `git merge branchName` - merge it with feature branch.
+
 `git push` - push updated code to Github.
+
 `git tag v2.15.7` - add a tag.
+
 `git checkout release` - go back to release if you still need it.
+
 `git merge master` - merge it with master.
+
 `git push` - and push again.
 
 After this release goes to codeship and to staging server.
