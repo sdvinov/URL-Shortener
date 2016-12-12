@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Links shortener",
   "main": "src/app.js",
+  "engines": {
+    "node": "v6.7.0",
+    "npm": "3.10.3"
+  },
   "scripts": {
     "start": "node src/app.js",
     "test": "mocha"
