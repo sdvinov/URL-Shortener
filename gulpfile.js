@@ -4,17 +4,18 @@ const argv = require('yargs').argv;
 const pkg = require('./package.json');
 const util = require('utility-tool-sd');
 const git = require('gulp-git');
-
-gulp.task('default', () => {
-  console.log('HW');
-});
+const gitignore = require('gulp-gitignore');
 
 gulp.task('add', () => {
-  console.log('HW');
+  return gulp.src('./*')
+    .pipe(gitignore())
+    .pipe(git.add());
 });
 
 gulp.task('commit', () => {
-  console.log('HW');
+  return gulp.src('./*')
+    .pipe(gitignore())
+    .pipe(git.commit(argv.commitMessage));
 });
 
 gulp.task('push', () => {
