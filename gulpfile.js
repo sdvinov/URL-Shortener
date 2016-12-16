@@ -17,7 +17,7 @@ gulp.task('commit', () => {
     .pipe(gitignore())
     .pipe(git.commit(argv.commitMessage));
 });
-
+// 1
 gulp.task('push', () => {
   console.log('HW');
 });
