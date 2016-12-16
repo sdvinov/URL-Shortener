@@ -19,7 +19,9 @@ gulp.task('commit', () => {
 });
 
 gulp.task('push', () => {
-  console.log('HW');
+  git.push('origin', argv.bracnch || 'gulp', (err) => {
+    if (err) throw err;
+  });
 });
 
 gulp.task('tag', () => {
