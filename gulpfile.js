@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const replace = require('gulp-replace');
+const argv = require('yargs').argv;
 
 gulp.task('default', () => {
   console.log('HW');
@@ -25,12 +26,11 @@ gulp.task('bump', ['add', 'commit', 'tag', 'push'], () => {
   console.log('HW');
 });
 
-gulp.task('bumpMajor', () => {
+gulp.task('bumper', () => {
   const pkg = require('./package.json');
   const util = require('utility-tool-sd');
-  const newVersion = util.bump(pkg.version, 'major');
+  const newVersion = util.bump(pkg.version, argv.bumpType);
   gulp.src(['./package.json'])
-    .pipe(replace("version": pkg.version, "version": newVersion))
+    .pipe(replace(`"version": "${pkg.version}"`, `"version": "${newVersion}"`))
     .pipe(gulp.dest('./'));
-  pkg.version = newVersion;
 });
