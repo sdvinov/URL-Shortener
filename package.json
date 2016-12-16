@@ -1,6 +1,6 @@
 {
   "name": "short.me",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "engines": {
     "node": "v6.8.1",
     "npm": "v3.10.8"

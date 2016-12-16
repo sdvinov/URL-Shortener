@@ -19,17 +19,9 @@ gulp.task('commit', () => {
 });
 
 gulp.task('push', () => {
-  git.push('origin', argv.bracnch || 'gulp', (err) => {
+  git.push('origin', argv.branch || 'master', (err) => {
     if (err) throw err;
   });
-});
-
-gulp.task('tag', () => {
-  console.log('HW');
-});
-
-gulp.task('bump', ['add', 'commit', 'tag', 'push'], () => {
-  console.log('HW');
 });
 
 gulp.task('bumper', () => {
@@ -38,3 +30,12 @@ gulp.task('bumper', () => {
     .pipe(replace(`"version": "${pkg.version}"`, `"version": "${newVersion}"`))
     .pipe(gulp.dest('./'));
 });
+
+gulp.task('tag', () => {
+  const tagVersion = pkg.version;
+  git.tag('v' + tagVersion, argv.versionMessage || 'Auto tag', (err) => {
+    if (err) throw err;
+  });
+});
+
+gulp.task('default', ['bumper', 'add', 'commit', 'tag', 'push']);
