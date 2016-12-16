@@ -18,7 +18,7 @@
     "express": "4.14.0",
     "mysql": "2.5.0",
     "sequelize": "3.27.0",
-    "utility-tool-sd": "^1.0.0"
+    "utility-tool-sd": "1.1.0"
   },
   "devDependencies": {
     "chai": "3.5.0",
