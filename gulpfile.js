@@ -15,7 +15,7 @@ gulp.task('add', () => {
 gulp.task('commit', () => {
   return gulp.src('./*')
     .pipe(gitignore())
-    .pipe(git.commit(argv.commitMessage));
+    .pipe(git.commit((argv.commitMessage).split('_').join(' ')));
 });
 // 1
 gulp.task('push', () => {
