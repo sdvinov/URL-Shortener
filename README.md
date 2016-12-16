@@ -260,8 +260,11 @@ After this release goes to codeship and to staging server.
 This project has automated task runner. It is located in `gulpfile.js`. To run it, simply type `gulp` in the command line. However, it accepts arguments for messages and bump type. Here is the list:
 
 `commitMessage` - git commit -m "commitMessage" **(does not tolerate spaces, use underscores instead (they will be replaced inside gulp))**
+
 `branch` - git push origin branch
+
 `bumpType` - needed for version bumping (major, minor or patch only)
+
 `versionMessage` - git tag v1.1.1 versionMessage **(does not tolerate spaces, use underscores instead (they will be replaced inside gulp))**
 
 To pass these values to Gulp, run command like this:
